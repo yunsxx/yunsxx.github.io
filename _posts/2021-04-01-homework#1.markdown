@@ -5,6 +5,8 @@ date: 2021-04-01 16:37
 categories: jekyll update
 ---
 
+## 첫 번째 과제 
+
 ## problem 
 
 : 여러 개의 점들이 좌표 상에 존재한다고 했을 때 가장 가까운 사이값을 가지는 두 점을 찾아내어라. 
@@ -36,7 +38,7 @@ public class Nearest {
         int dis[] = new int [(x.length*(x.length-1))/2];
         int n = 0;
         for(int i = 0; i < x.length-1; i++) {
-            for(int j = i+1; j<x.length;j++) {
+            for(int j = i+1; j < x.length;j++) {
                 int result = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
                 System.out.println(i + " , " + j + " -> " + result);
                 dis[n++] = result;
@@ -65,6 +67,22 @@ public class Nearest {
 
 ![코드사진](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155920.png)
 
+<사진이 안 보일 경우>
+
+```
+0 , 1 -> 98
+0 , 2 -> 13
+0 , 3 -> 169
+0 , 4 -> 40
+1 , 2 -> 41
+1 , 3 -> 365
+1 , 4 -> 194
+2 , 3 -> 200
+2 , 4 -> 65
+3 , 4 -> 45
+가장 가까운 점들의 거리(제곱상태)는 13
+```
+
 점 0 ~ 점 4까지 중 점 0과 점 2 사이의 거리가 가장 짧을 것을 알아내었다! 
 
 ------------------------
@@ -75,7 +93,39 @@ public class Nearest {
 
 ![코드사진2](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155817 (2).png)
 
-![20210401_155803](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155803.png)
+<사진이 안 보일 경우를 위해..>
+
+```
+public static void cal_distance(int x[], int y[]) {
+    double dis[] = new double [(x.length*(x.length-1)/2)];
+    int n = 0;
+    for(int i = 0; i<x.length;i++) {
+        for(int j = i+1; j<x.length;j++) {
+            double result = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j])
+            result = Math.sqrt(result);
+            System.out.println( i +" , " + j + " -> " + result);
+            dis[n++] = result;
+        }
+    }
+    Nearest.find_closest(dis);
+}
+```
+
+![코드사진3](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155803.png)
+
+```
+0 , 1 -> 9.899494936611665
+0 , 2 -> 3.605551275463989
+0 , 3 -> 13.0
+0 , 4 -> 6.324555320336759
+1 , 2 -> 6.4031242374328485
+1 , 3 -> 19,1049731745428
+1 , 4 -> 13.92838827718412
+2 , 3 -> 14.142135623730951
+2 , 4 -> 8.062257774829855
+3 , 4 -> 6.708203932499369
+가장 가까운 점들의 거리는 3.605551275463989
+```
 
 결과값이 제곱근으로 바꿔서 출력되는 것을 볼 수 있다! 
 
