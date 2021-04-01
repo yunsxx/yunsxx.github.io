@@ -22,9 +22,9 @@ categories: jekyll update
 
 구현할 함수 : main(), cal_distance(), find_closest()
 
-cal_distance : x,y좌표 값을 가지고 있는 배열을 받아 각 점 사이의 사이값을 계산하는 함수
+**cal_distance** : x,y좌표 값을 가지고 있는 배열을 받아 각 점 사이의 사이값을 계산하는 함수
 
-find_closest : cal_distance에서 계산한 값을 가진 배열을 받아 그 중 가장 작은 값을 찾아내는 함수
+**find_closest** : cal_distance에서 계산한 값을 가진 배열을 받아 그 중 가장 작은 값을 찾아내는 함수
 
 -----------------------------
 
@@ -75,7 +75,7 @@ public class Nearest {
 
 ![코드사진2](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155817 (2).png)
 
-![코드사진3](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155803.png)
+![20210401_155803](C:\Users\User\Pictures\컴퓨터 알고리즘\20210401_155803.png)
 
 결과값이 제곱근으로 바꿔서 출력되는 것을 볼 수 있다! 
 
