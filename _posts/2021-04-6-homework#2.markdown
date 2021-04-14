@@ -7,7 +7,7 @@ categories: jekyll update
 
 ## 두 번째 과제
 
-## porblem (Dijkstra)
+## problem (Dijkstra)
 
 : Dijkstra algorithm을 구현하라. 
 
