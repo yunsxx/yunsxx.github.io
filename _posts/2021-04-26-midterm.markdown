@@ -45,12 +45,12 @@ public class MatrixChain {
             Matrix[i][i] = 0; //대각선 요소 0으로 초기화
         }
 
-        //부분문제가 n-1개 일 때 (=3개)
+        //계산해야할 요소가 n-1개 일 때 (=부분문제가 3개)
         for(int i = 0; i < n-1; i++) { // i = 0, 1, 2
             Matrix[i][i+1] = a[i]*a[i+1]*a[i+2];
         }
 
-        //부분문제가 n-2개 일 때 (=2개)
+        //계산해야할 요소가 n-2개 일 때 (=부분문제가 2개)
         for(int i = 0; i < n-2; i++) { //i = 0, 1
             int j = i+2;
             int com1 = a[i]*a[j]*a[j+1]+Matrix[i][j-1]; //[0,1]이 [1,2]보다 작은 경우 , [1,2]가 [2,3]보다 작은 경우 ..
@@ -59,7 +59,7 @@ public class MatrixChain {
             Matrix[i][j] = getMin(com1,com2);
         }
 
-        //부분문제가 n-3개 일 때 (=1개)
+        //계산해야할 요소가 n-3개 일 때 (=부분문제가 1개)
         for(int i = 0; i < n-3; i++) { // i = 0
             int j = i+3;
             int com1 = a[i]*a[j-1]*a[j+1]+Matrix[i][i+1]+Matrix[j-1][j]; //AB*CD일 경우
@@ -262,15 +262,7 @@ arr[]에 10, 20, 5, 15, 30을 입력하고 실행시켜보면 결과적으로 4,
 
 ![20210427_150049](https://user-images.githubusercontent.com/80511175/116245648-214b7300-a7a4-11eb-8836-4f06a7dba2f6.png)
 
-----------------
-
-#### <자세한 코드 분석>
-
-
-
-------------------
-
-#### <성능분석>
+---------------------
 
 MatrixMul()에서 연산횟수를 따져보면 처음에는 n-1회, n-2회, n-3회 ... 1회로 줄어들게 된다. (n은 matrix 개수)
 
@@ -282,7 +274,43 @@ MatrixMul()에서 연산횟수를 따져보면 처음에는 n-1회, n-2회, n-3�
 
 만약 행렬 곱을 실행하는 코드가 다음과 같다면 어떻게 될지 생각해보자. 
 
+```
+    static int INF = 100000000;
+    public static void matrixMul(int a[]) {
+        int n = a.length-1;
+        int Matrix[][] = new int[n][n];
+
+        for(int i = 0; i < Matrix.length; i++) {
+            Matrix[i][i] = 0; //대각선요소 0으로 초기화
+        }
+
+        int l, i, j ,k = 0;
+        int temp = 0;
+        for(l = 1; l < n-1; l++) {
+            for(i = 0; i < n-l; i++) {
+                j = i+l;
+                Matrix[i][j] = INF; // 높은 값으로 초기화 해놓고 
+                for(k = i; k < j-1; k++) {
+                    temp = Matrix[i][k] + Matrix[k+1][j] + a[i]*a[k+1]*a[j+1];
+                    if(temp < Matrix[i][j]) // 값 비교해서 
+                        Matrix[i][j] = temp; //더 작은 값으로 바꿈
+                }
+            }
+        }
+    }
+```
+
+2차원 배열 Matrix의 요소들을 계산하는 부분에서 nxn의 시간이 걸리고,
+
+k에 대한 for문이 최대 n-1번 실행되기 때문에 결과적으로 시간복잡도는 O(N^2) x O(N) = **O(N^3)**이 된다.
 
 
 
+=> 같은 실행을 함에 있어서도 시간복잡도가 달라질 수 있다. 
+
+n = 4라면 첫 번째 코드를 사용하는 것이 시간복잡도를 줄이는데 도움이 되겠지만, 
+
+그 이상의 matrix를 다루기 위해서는 후자의 코드를 사용해야한다. 
+
+(첫 번째 코드는 n =4 일 때 계산이 가능하게 짠 코드이기 때문.. :0)
 
